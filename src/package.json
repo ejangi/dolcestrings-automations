@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "author": "James Angus <james@ejangi.com>",
-  "license": "MIT",
+  "license": "&copy; Copyright James Angus 2023",
   "private": true,
   "scripts": {
     "start": "functions-framework --target=productPricingUpdate",
