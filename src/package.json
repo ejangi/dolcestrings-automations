@@ -1,0 +1,11 @@
+{
+  "name": "dolcestrings-automations",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "James Angus <james@ejangi.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "node ./index.js"
+  }
+}
