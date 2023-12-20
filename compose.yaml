@@ -4,7 +4,3 @@ services:
     build: .
     volumes:
       - ./src:/app
-    ports:
-      - 8080:8080
-    environment:
-      SQUARESPACE_API_KEY: abc123

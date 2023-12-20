@@ -1,8 +1,7 @@
 test("Function can be invoked", async () => {
-    await fetch("http://localhost:8080/", {
+    await fetch("http://localhost:8080/price-update", {
         method: "post",
         headers: {
-            'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
 
