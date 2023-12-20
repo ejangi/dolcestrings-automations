@@ -1,7 +1,7 @@
 const functions = require('@google-cloud/functions-framework');
 const express = require('express');
 const app = express();
-const priceUpdate = require('./priceUpdate.js');
+const priceUpdate = require('./priceUpdate');
 
 
 

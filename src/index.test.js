@@ -11,7 +11,8 @@ test('Function can be invoked', async () => {
     await fetch('http://localhost:8080/price-update', {
         method: "post",
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer abc123'
         },
 
         //make sure to serialize your JSON body
@@ -19,7 +20,9 @@ test('Function can be invoked', async () => {
             file: 'mylongfilename.csv'
         })
     })
-    .then( (response) => { 
+    .then( async (response) => {
+        const text = await response.text(); 
+        console.log(text);
         expect(response.status).toBe(200);
     });
 });
