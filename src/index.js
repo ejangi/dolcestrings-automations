@@ -1,11 +1,12 @@
+const functions = require('@google-cloud/functions-framework');
 const express = require('express');
 const app = express();
 const priceUpdate = require('./priceUpdate.js');
 
 
 
-app.post('/webhooks/price-update', priceUpdate.run);
-app.get('/webhooks', (req, res) => {
+app.post('/price-update', priceUpdate.run);
+app.get('/', (req, res) => {
     res.send('OK');
 });
 
@@ -14,4 +15,5 @@ app.get('/webhooks', (req, res) => {
  * @param req https://expressjs.com/en/api.html#req
  * @param res https://expressjs.com/en/api.html#res
  */
-exports.webhooks = app;
+// exports.webhooks = app;
+functions.http('webhooks', app);
