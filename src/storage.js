@@ -28,8 +28,15 @@ async function getJSONFile(filename) {
 
 
 
+async function saveFile(fileName, contents) {
+    await storage.bucket(bucketName).file(fileName).save(contents);
+}
+
+
+
 module.exports = {
     setBucketName,
     getFile,
-    getJSONFile
+    getJSONFile,
+    saveFile
 }

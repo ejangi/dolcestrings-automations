@@ -22,3 +22,14 @@ test('can get JSON file contents', async () => {
     expect(json.length).not.toBe(0);
     expect(json[0].sku).not.toBe(null);
 });
+
+
+
+test('can save file to bucket', async() => {
+    const message = "Saved Successfully!";
+    await gs.setBucketName(process.env.GS_BUCKET);
+    await gs.saveFile('testing.json', JSON.stringify({"message":message}));
+    const json = await gs.getJSONFile('testing.json');
+    expect(json).not.toBe(null);
+    expect(json.message).toBe(message);
+})

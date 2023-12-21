@@ -12,7 +12,7 @@ test('Function can be invoked', async () => {
         method: "post",
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer abc123'
+            'Authorization': 'Bearer ' + process.env.SECRET_KEY
         },
 
         //make sure to serialize your JSON body

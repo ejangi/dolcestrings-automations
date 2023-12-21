@@ -3,6 +3,28 @@ const gs = require('./storage');
 
 
 
+async function createChangesList(current_products, new_prices) {
+    return new Promise((resolve) => {
+        let changes = [];
+
+        new_prices.forEach((new_price) => {
+            let current_product = current_products.filter((product) => {
+                return product.sku == new_price.sku;
+            })[0];
+
+            if (current_product !== undefined && 
+                new_price.sku == current_product.sku &&
+                new_price.price !== current_product.pricing.base_price.value) {
+                changes.push({...current_product, pricing: new_price.price});
+            }
+        });
+
+        resolve(changes);
+    });
+}
+
+
+
 async function run (req, res) {
     const key = req.get("Authorization").split(' ')[1];
     const valid = auth.authenticate(key);
@@ -24,8 +46,17 @@ async function run (req, res) {
         return;
     }
 
-    await gs.setBucketName(process.env.GS_BUCKET);
-    const current_products = gs.getJSONFile(req.body?.current_products_filename);
+    try {
+        await gs.setBucketName(process.env.GS_BUCKET);
+        const current_products = await gs.getJSONFile(req.body?.current_products_filename);
+        const new_prices = await gs.getJSONFile(req.body?.new_prices_filename);
+        const changes = await createChangesList(current_products, new_prices);
+        await gs.saveFile('changes.json', JSON.stringify(changes));
+    } catch(e) {
+        console.error('Error in priceUpdate.js: ' + e);
+        res.status(500).send('Server Error');
+        return;
+    }
 
     res.send('OK');
 }
@@ -33,5 +64,6 @@ async function run (req, res) {
 
 
 module.exports = {
-    run
+    run,
+    createChangesList
 };
