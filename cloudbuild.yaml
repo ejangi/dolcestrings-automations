@@ -15,7 +15,6 @@ steps:
     - --runtime=nodejs20
     - --region=${_REGION}
     - --source=src/
-    - --entry-point=index.js
     - --max-instances=1
     - --memory=128Mi
     - --set-env-vars 

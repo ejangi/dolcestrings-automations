@@ -15,5 +15,7 @@ app.get('/', (req, res) => {
  * @param req https://expressjs.com/en/api.html#req
  * @param res https://expressjs.com/en/api.html#res
  */
-// exports.webhooks = app;
+// module.exports = {
+//     webhooks: app
+// }
 functions.http('webhooks', app);
