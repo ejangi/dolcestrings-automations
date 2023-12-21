@@ -68,12 +68,14 @@ async function run (req, res) {
             await fetch(req.body.success_webhook, {
                 method: "post",
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + key
                 },
         
                 //make sure to serialize your JSON body
                 body: JSON.stringify({
-                    change_filename: 'changes.json'
+                    change_filename: 'changes.json',
+                    authorization: key
                 })
             });
         } catch (e) {
