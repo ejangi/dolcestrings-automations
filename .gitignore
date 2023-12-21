@@ -1,2 +1,4 @@
 .DS_Store
 src/node_modules
+src/service-account*.json
+src/*.json:Zone.Identifier
