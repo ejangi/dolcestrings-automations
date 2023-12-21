@@ -17,7 +17,8 @@ test('Function can be invoked', async () => {
 
         //make sure to serialize your JSON body
         body: JSON.stringify({
-            file: 'mylongfilename.csv'
+            current_products_filename: 'current_products.json',
+            new_prices_filename: 'new_prices.json'
         })
     })
     .then( async (response) => {

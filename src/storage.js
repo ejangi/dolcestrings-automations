@@ -21,7 +21,15 @@ async function getFile(fileName) {
 
 
 
+async function getJSONFile(filename) {
+    const contents = await getFile(filename);
+    return JSON.parse(contents.toString());
+}
+
+
+
 module.exports = {
     setBucketName,
-    getFile
+    getFile,
+    getJSONFile
 }
