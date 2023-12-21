@@ -8,11 +8,16 @@ async function createChangesList(current_products, new_prices) {
         let changes = [];
 
         new_prices.forEach((new_price) => {
+            if (!new_price.sku) return;
+
+            new_price.sku = new_price.sku.replaceAll("'",'');
+
             let current_product = current_products.filter((product) => {
                 return product.sku == new_price.sku;
             })[0];
 
-            if (current_product !== undefined && 
+            if (current_product && 
+                current_product.sku &&
                 new_price.sku == current_product.sku &&
                 new_price.price !== current_product.pricing.base_price.value) {
                 changes.push({...current_product, pricing: new_price.price});
@@ -56,6 +61,24 @@ async function run (req, res) {
         console.error('Error in priceUpdate.js: ' + e);
         res.status(500).send('Server Error');
         return;
+    }
+
+    if (req.body?.success_webhook) {
+        try {
+            await fetch(req.body.success_webhook, {
+                method: "post",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+        
+                //make sure to serialize your JSON body
+                body: JSON.stringify({
+                    change_filename: 'changes.json'
+                })
+            });
+        } catch (e) {
+            console.error('Could not hit the success_webhook: ' + e);
+        }
     }
 
     res.send('OK');
