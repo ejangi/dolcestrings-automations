@@ -1,0 +1,11 @@
+# Set the following build variables via the Cloud Build:
+# _REGION
+# _SECRET_KEY
+# _GS_BUCKET
+steps:
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: Deploy
+  args: ['functions', 'deploy', 'webhooks', '--trigger-topic', 'cloud-builds', '--runtime', 'nodejs20', '--region', '${_REGION}', '--source', 'src/', '--entrypoint', 'index.js', '--gen2']
+  env: 
+    - 'SECRET_KEY=${_SECRET_KEY}'
+    - 'GS_BUCKET=${_GS_BUCKET}'
