@@ -5,7 +5,7 @@
 steps:
 - name: 'gcr.io/cloud-builders/gcloud'
   id: Deploy
-  args: ['functions', 'deploy', 'webhooks', '--trigger-topic', 'cloud-builds', '--runtime', 'nodejs20', '--region', '${_REGION}', '--source', 'src/', '--entry-point', 'index.js', '--gen2']
+  args: ['functions', 'deploy', 'webhooks', '--trigger-http', '--runtime', 'nodejs20', '--region', '${_REGION}', '--source', 'src/', '--entry-point', 'index.js', '--gen2']
   env: 
     - 'SECRET_KEY=${_SECRET_KEY}'
     - 'GS_BUCKET=${_GS_BUCKET}'
