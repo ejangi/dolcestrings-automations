@@ -5,6 +5,10 @@
   "author": "James Angus <james@ejangi.com>",
   "license": "&copy; Copyright James Angus 2023",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ejangi/dolcestrings-automations.git"
+  },
   "scripts": {
     "start": "functions-framework --target=webhooks",
     "dev": "npm-watch start",

@@ -3,9 +3,20 @@
 # _SECRET_KEY
 # _GS_BUCKET
 steps:
-- name: 'gcr.io/cloud-builders/gcloud'
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   id: Deploy
-  args: ['functions', 'deploy', 'webhooks', '--trigger-http', '--allow-unauthenticated', '--runtime', 'nodejs20', '--region', '${_REGION}', '--source', 'src/', '--entry-point', 'index.js', '--gen2']
+  args: 
+    - gcloud
+    - functions
+    - deploy
+    - webhooks
+    - --trigger-http
+    - --allow-unauthenticated
+    - --gen2
+    - --runtime=nodejs20
+    - --region=${_REGION}
+    - --source=src/
+    - --entry-point=index.js
   env: 
     - 'SECRET_KEY=${_SECRET_KEY}'
     - 'GS_BUCKET=${_GS_BUCKET}'
